@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Douve — Nº1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:  #2A2AE0;
+  --red:   #E8200A;
+  --white: #FFFFFF;
+  --white-60: rgba(255,255,255,0.6);
+  --white-20: rgba(255,255,255,0.15);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+body {
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--blue);
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--white-20);
+  animation: fadeDown 0.5s ease both;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--red);
+  line-height: 1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-issue {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white-60);
+  letter-spacing: 0.06em;
+}
+
+/* ── LANG SWITCHER ── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 2px;
+  transition: color 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+.lang-btn:hover { color: var(--white); }
+
+.lang-btn.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.12);
+}
+
+.lang-sep {
+  color: var(--white-20);
+  font-size: 10px;
+  user-select: none;
+}
+
+/* desktop nav */
+.nav-desktop ul { list-style: none; display: flex; gap: 32px; }
+
+.nav-desktop ul li a {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--white-60);
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-desktop ul li a:hover,
+.nav-desktop ul li a.active { color: var(--white); }
+
+/* hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.25s;
+}
+
+/* mobile menu */
+.nav-mobile {
+  display: none;
+  position: fixed;
+  inset: 60px 0 0 0;
+  background: var(--blue);
+  z-index: 99;
+  flex-direction: column;
+  padding: 40px 32px;
+  border-top: 1px solid var(--white-20);
+}
+
+.nav-mobile.open { display: flex; }
+
+.nav-mobile ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+
+.nav-mobile ul li a {
+  display: block;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--white-20);
+  transition: color 0.2s;
+}
+
+.nav-mobile ul li a:hover { color: var(--red); }
+
+/* lang switcher inside mobile menu */
+.nav-mobile .lang-switcher {
+  margin-top: 32px;
+  gap: 8px;
+}
+
+.nav-mobile .lang-btn {
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid var(--white-20);
+  border-radius: 3px;
+}
+
+.nav-mobile .lang-btn.active {
+  border-color: var(--white-60);
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+}
+
+/* ── HERO ── */
+.hero {
+  max-width: 1100px;
+  margin: 80px auto 100px;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 24px;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--red);
+}
+
+.hero-title {
+  font-size: 60px;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.hero-excerpt {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--white-60);
+  margin-bottom: 36px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover { opacity: 0.85; }
+
+.hero-image {
+  aspect-ratio: 4/5;
+  background: var(--red);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(255,255,255,0.06) 12px, rgba(255,255,255,0.06) 13px);
+}
+
+.hero-image-label {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── DIVIDER ── */
+.divider {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.divider-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  white-space: nowrap;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--white-20);
+}
+
+/* ── CARDS ── */
+.cards-section {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 40px;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 32px;
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-4px);
+}
+
+.card-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.card-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--white-60);
+  margin-bottom: 24px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--white-20);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.card-footer-author { color: var(--red); }
+.card-footer-date { color: var(--white-60); }
+
+/* ── MOST READ ── */
+.mostread-section {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 40px;
+  animation: fadeUp 0.7s 0.25s ease both;
+}
+
+.mr-item {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--white-20);
+  cursor: pointer;
+}
+
+.mr-item:hover .mr-title { color: var(--red); }
+
+.mr-num {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--red);
+  opacity: 0.5;
+  min-width: 48px;
+  letter-spacing: -0.04em;
+}
+
+.mr-content { flex: 1; }
+
+.mr-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.mr-title {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.mr-time {
+  font-size: 12px;
+  color: var(--white-60);
+  font-weight: 500;
+}
+
+/* ── QUOTE ── */
+.quote-section {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 40px;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+.quote-inner {
+  border-left: 4px solid var(--red);
+  padding: 8px 0 8px 40px;
+}
+
+.quote-text {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.quote-source {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ── NEWSLETTER ── */
+.newsletter-section {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 40px;
+  animation: fadeUp 0.7s 0.35s ease both;
+}
+
+.newsletter-inner {
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.nl-title {
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.nl-title span { color: var(--red); }
+
+.nl-sub {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--white-60);
+}
+
+.nl-form { display: flex; flex-direction: column; gap: 12px; }
+
+.nl-input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--white-20);
+  border-radius: 6px;
+  color: var(--white);
+  padding: 16px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.nl-input::placeholder { color: var(--white-60); }
+.nl-input:focus { border-color: var(--red); }
+
+.nl-btn {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.nl-btn:hover { opacity: 0.85; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--white-20);
+  padding: 48px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.footer-logo {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.footer-tagline {
+  font-size: 12px;
+  color: var(--white-60);
+  margin-top: 4px;
+}
+
+.footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
+
+.footer-links a {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--white); }
+
+.footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  white-space: nowrap;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════
+   RESPONSIVE — TABLET (≤768px)
+════════════════════════════ */
+@media (max-width: 768px) {
+
+  header { padding: 0 24px; }
+
+  .nav-desktop { display: none; }
+  .hamburger { display: flex; }
+  .header-issue { display: none; }
+
+  /* hide desktop lang switcher on mobile (it's in mobile menu) */
+  .header-right .lang-switcher { display: none; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin: 48px auto 64px;
+    padding: 0 24px;
+  }
+
+  .hero { display: flex; flex-direction: column-reverse; }
+
+  .hero-image {
+    aspect-ratio: 16/9;
+    width: 100%;
+  }
+
+  .hero-title { font-size: 40px; }
+  .hero-excerpt { font-size: 15px; }
+
+  .divider { padding: 0 24px; margin-bottom: 32px; }
+
+  .cards-section { padding: 0 24px; margin-bottom: 64px; }
+  .cards-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  .mostread-section { padding: 0 24px; margin-bottom: 64px; }
+
+  .mr-item { gap: 20px; }
+  .mr-num { font-size: 28px; min-width: 36px; }
+  .mr-title { font-size: 16px; }
+  .mr-time { display: none; }
+
+  .quote-section { padding: 0 24px; margin-bottom: 64px; }
+  .quote-text { font-size: 26px; }
+  .quote-inner { padding-left: 24px; }
+
+  .newsletter-section { padding: 0 24px; margin-bottom: 64px; }
+  .newsletter-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 40px 32px;
+  }
+  .nl-title { font-size: 32px; }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 24px;
+    gap: 24px;
+  }
+
+  .footer-links { gap: 16px; }
+}
+
+/* ════════════════════════════
+   RESPONSIVE — MOBILE (≤480px)
+════════════════════════════ */
+@media (max-width: 480px) {
+  .hero-title { font-size: 32px; }
+  .card-title { font-size: 18px; }
+  .quote-text { font-size: 22px; }
+  .nl-title { font-size: 28px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Douve.</div>
+
+  <!-- Desktop nav -->
+  <nav class="nav-desktop">
+    <ul>
+      <li><a href="#" class="active" data-i18n="nav_editorial"></a></li>
+      <li><a href="#" data-i18n="nav_literature"></a></li>
+      <li><a href="#" data-i18n="nav_music"></a></li>
+      <li><a href="#" data-i18n="nav_cinema"></a></li>
+      <li><a href="#" data-i18n="nav_art"></a></li>
+      <li><a href="#" data-i18n="nav_philosophy"></a></li>
+    </ul>
+  </nav>
+
+  <div class="header-right">
+    <span class="header-issue" data-i18n="issue_label"></span>
+    <!-- Desktop lang switcher -->
+    <div class="lang-switcher" id="lang-switcher-desktop">
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="it" onclick="setLang('it')">IT</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+    <!-- Hamburger mobile -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<nav class="nav-mobile" id="nav-mobile">
+  <ul>
+    <li><a href="#" onclick="closeMenu()" data-i18n="nav_editorial"></a></li>
+    <li><a href="#" onclick="closeMenu()" data-i18n="nav_literature"></a></li>
+    <li><a href="#" onclick="closeMenu()" data-i18n="nav_music"></a></li>
+    <li><a href="#" onclick="closeMenu()" data-i18n="nav_cinema"></a></li>
+    <li><a href="#" onclick="closeMenu()" data-i18n="nav_art"></a></li>
+    <li><a href="#" onclick="closeMenu()" data-i18n="nav_philosophy"></a></li>
+  </ul>
+  <!-- Mobile lang switcher -->
+  <div class="lang-switcher" id="lang-switcher-mobile">
+    <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" data-lang="it" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-tag" data-i18n="hero_tag"></div>
+    <h1 class="hero-title" data-i18n="hero_title"></h1>
+    <p class="hero-excerpt" data-i18n="hero_excerpt"></p>
+    <a href="#" class="btn-primary" data-i18n="hero_cta"></a>
+  </div>
+  <div class="hero-image">
+    <span class="hero-image-label" data-i18n="hero_image_label"></span>
+  </div>
+</section>
+
+<!-- ARTICOLI RECENTI -->
+<div class="divider">
+  <span class="divider-label" data-i18n="section_recent"></span>
+  <div class="divider-line"></div>
+</div>
+
+<section class="cards-section">
+  <div class="cards-grid">
+    <article class="card">
+      <div class="card-cat" data-i18n="cat_literature"></div>
+      <h3 class="card-title" data-i18n="card1_title"></h3>
+      <p class="card-body" data-i18n="card1_body"></p>
+      <div class="card-footer">
+        <span class="card-footer-author">Elena Gatti</span>
+        <span class="card-footer-date" data-i18n="card1_date"></span>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-cat" data-i18n="cat_music"></div>
+      <h3 class="card-title" data-i18n="card2_title"></h3>
+      <p class="card-body" data-i18n="card2_body"></p>
+      <div class="card-footer">
+        <span class="card-footer-author">Sofia Albanese</span>
+        <span class="card-footer-date" data-i18n="card2_date"></span>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-cat" data-i18n="cat_cinema"></div>
+      <h3 class="card-title" data-i18n="card3_title"></h3>
+      <p class="card-body" data-i18n="card3_body"></p>
+      <div class="card-footer">
+        <span class="card-footer-author">Luca Ferrara</span>
+        <span class="card-footer-date" data-i18n="card3_date"></span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- I PIÙ LETTI -->
+<div class="divider">
+  <span class="divider-label" data-i18n="section_mostread"></span>
+  <div class="divider-line"></div>
+</div>
+
+<section class="mostread-section">
+  <div class="mr-item">
+    <div class="mr-num">01</div>
+    <div class="mr-content">
+      <div class="mr-cat" data-i18n="cat_philosophy"></div>
+      <div class="mr-title" data-i18n="mr1_title"></div>
+    </div>
+    <span class="mr-time">14 min</span>
+  </div>
+  <div class="mr-item">
+    <div class="mr-num">02</div>
+    <div class="mr-content">
+      <div class="mr-cat" data-i18n="cat_art"></div>
+      <div class="mr-title" data-i18n="mr2_title"></div>
+    </div>
+    <span class="mr-time">6 min</span>
+  </div>
+  <div class="mr-item">
+    <div class="mr-num">03</div>
+    <div class="mr-content">
+      <div class="mr-cat" data-i18n="cat_photography"></div>
+      <div class="mr-title" data-i18n="mr3_title"></div>
+    </div>
+    <span class="mr-time">10 min</span>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-inner">
+    <p class="quote-text" data-i18n="quote_text"></p>
+    <span class="quote-source" data-i18n="issue_label"></span>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="newsletter-inner">
+    <div>
+      <div class="nl-title" data-i18n="nl_title"></div>
+      <p class="nl-sub" data-i18n="nl_sub"></p>
+    </div>
+    <div class="nl-form">
+      <input class="nl-input" type="email" data-i18n-placeholder="nl_placeholder">
+      <button class="nl-btn" data-i18n="nl_btn"></button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Douve.</div>
+    <div class="footer-tagline">Bulletin d'art · Bollettino d'arte · Art bulletin</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#" data-i18n="footer_about"></a></li>
+    <li><a href="#" data-i18n="footer_contribute"></a></li>
+    <li><a href="#" data-i18n="footer_archive"></a></li>
+    <li><a href="#" data-i18n="footer_contact"></a></li>
+    <li><a href="#">Instagram</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Douve</span>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════════════ */
+const translations = {
+
+  fr: {
+    issue_label:    "Nº1 — Janvier '26",
+    nav_editorial:  "Éditorial",
+    nav_literature: "Littérature",
+    nav_music:      "Musique",
+    nav_cinema:     "Cinéma",
+    nav_art:        "Art",
+    nav_philosophy: "Philosophie",
+
+    hero_tag:         "Éditorial",
+    hero_title:       "La parole comme acte politique //",
+    hero_excerpt:     "À une époque où chaque énoncé devient contenu, choisir ses mots avec soin est le geste le plus subversif qu'il nous reste.",
+    hero_cta:         "Lire l'article →",
+    hero_image_label: "Image de couverture",
+
+    section_recent:  "Articles récents",
+    section_mostread:"Les plus lus",
+
+    cat_literature:  "Littérature",
+    cat_music:       "Musique",
+    cat_cinema:      "Cinéma",
+    cat_philosophy:  "Philosophie",
+    cat_art:         "Art",
+    cat_photography: "Photographie",
+
+    card1_title: "Relire Pasolini en 2026 //",
+    card1_body:  "Cinquante ans après sa disparition, la voix de Pasolini résonne avec une précision inquiétante.",
+    card1_date:  "10 Mar",
+    card2_title: "Le noise comme silence //",
+    card2_body:  "Comment la musique expérimentale contemporaine réinvente l'idée d'absence sonore et d'écoute.",
+    card2_date:  "8 Mar",
+    card3_title: "Slow cinema : résister //",
+    card3_body:  "De Tarkovski à Ceylan, le cinéma lent comme forme de résistance à l'effondrement de l'attention.",
+    card3_date:  "5 Mar",
+
+    mr1_title: "Pourquoi ne lisons-nous plus de longs livres //",
+    mr2_title: "La peinture lente contre le temps du marché //",
+    mr3_title: "Habiter l'image : espace et regard urbain //",
+
+    quote_text: "« Le langage ne décrit pas le monde — il le construit. »",
+
+    nl_title:       "Restez avec <span>nous.</span>",
+    nl_sub:         "La newsletter mensuelle de Douve. Art, poésie, musique, cultures — directement dans votre boîte mail.",
+    nl_placeholder: "Votre email",
+    nl_btn:         "S'inscrire →",
+
+    footer_about:      "À propos",
+    footer_contribute: "Contribuer",
+    footer_archive:    "Archives",
+    footer_contact:    "Contact",
+  },
+
+  it: {
+    issue_label:    "Nº1 — Gennaio '26",
+    nav_editorial:  "Editoriale",
+    nav_literature: "Letteratura",
+    nav_music:      "Musica",
+    nav_cinema:     "Cinema",
+    nav_art:        "Arte",
+    nav_philosophy: "Filosofia",
+
+    hero_tag:         "Editoriale",
+    hero_title:       "La parola come atto politico //",
+    hero_excerpt:     "In un'epoca in cui ogni enunciato diventa contenuto, scegliere con cura le proprie parole è il gesto più sovversivo che ci rimanga.",
+    hero_cta:         "Leggi l'articolo →",
+    hero_image_label: "Immagine copertina",
+
+    section_recent:  "Articoli recenti",
+    section_mostread:"I più letti",
+
+    cat_literature:  "Letteratura",
+    cat_music:       "Musica",
+    cat_cinema:      "Cinema",
+    cat_philosophy:  "Filosofia",
+    cat_art:         "Arte",
+    cat_photography: "Fotografia",
+
+    card1_title: "Rileggere Pasolini nel 2026 //",
+    card1_body:  "A cinquant'anni dalla sua scomparsa, la voce di Pasolini risuona con una precisione inquietante.",
+    card1_date:  "10 Mar",
+    card2_title: "Il noise come silenzio //",
+    card2_body:  "Come la musica sperimentale contemporanea reinventa l'idea di assenza sonora e di ascolto.",
+    card2_date:  "8 Mar",
+    card3_title: "Slow cinema: resistere //",
+    card3_body:  "Da Tarkovskij a Ceylan, il cinema lento come forma di resistenza al collasso dell'attenzione.",
+    card3_date:  "5 Mar",
+
+    mr1_title: "Perché non leggiamo più libri lunghi //",
+    mr2_title: "La pittura lenta contro il tempo del mercato //",
+    mr3_title: "Abitare l'immagine: spazio e sguardo urbano //",
+
+    quote_text: "«Il linguaggio non descrive il mondo — lo costruisce.»",
+
+    nl_title:       "Resta con <span>noi.</span>",
+    nl_sub:         "La newsletter mensile di Douve. Arte, poesia, musica, culture — direttamente nella tua casella di posta.",
+    nl_placeholder: "La tua email",
+    nl_btn:         "Iscriviti ora →",
+
+    footer_about:      "Chi siamo",
+    footer_contribute: "Collabora",
+    footer_archive:    "Archivio",
+    footer_contact:    "Contatti",
+  },
+
+  en: {
+    issue_label:    "Nº1 — January '26",
+    nav_editorial:  "Editorial",
+    nav_literature: "Literature",
+    nav_music:      "Music",
+    nav_cinema:     "Cinema",
+    nav_art:        "Art",
+    nav_philosophy: "Philosophy",
+
+    hero_tag:         "Editorial",
+    hero_title:       "The word as a political act //",
+    hero_excerpt:     "In an age where every utterance becomes content, choosing your words carefully is the most subversive gesture we have left.",
+    hero_cta:         "Read the article →",
+    hero_image_label: "Cover image",
+
+    section_recent:  "Recent articles",
+    section_mostread:"Most read",
+
+    cat_literature:  "Literature",
+    cat_music:       "Music",
+    cat_cinema:      "Cinema",
+    cat_philosophy:  "Philosophy",
+    cat_art:         "Art",
+    cat_photography: "Photography",
+
+    card1_title: "Re-reading Pasolini in 2026 //",
+    card1_body:  "Fifty years after his death, Pasolini's voice resonates with unsettling precision.",
+    card1_date:  "Mar 10",
+    card2_title: "Noise as silence //",
+    card2_body:  "How contemporary experimental music reinvents the idea of sonic absence and listening.",
+    card2_date:  "Mar 8",
+    card3_title: "Slow cinema: to resist //",
+    card3_body:  "From Tarkovsky to Ceylan, slow cinema as resistance to the collapse of attention.",
+    card3_date:  "Mar 5",
+
+    mr1_title: "Why we no longer read long books //",
+    mr2_title: "Slow painting against the market's time //",
+    mr3_title: "Inhabiting the image: space and urban gaze //",
+
+    quote_text: '"Language does not describe the world — it constructs it."',
+
+    nl_title:       "Stay with <span>us.</span>",
+    nl_sub:         "Douve's monthly newsletter. Art, poetry, music, cultures — straight to your inbox.",
+    nl_placeholder: "Your email",
+    nl_btn:         "Subscribe now →",
+
+    footer_about:      "About",
+    footer_contribute: "Contribute",
+    footer_archive:    "Archive",
+    footer_contact:    "Contact",
+  }
+};
+
+/* ═══════════════════════════════════════
+   ENGINE
+═══════════════════════════════════════ */
+function setLang(lang) {
+  const t = translations[lang];
+  if (!t) return;
+
+  // Update text content
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+
+  // Update <html lang>
+  document.documentElement.lang = lang;
+
+  // Update active button state (both desktop and mobile switchers)
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+
+  // Persist choice
+  localStorage.setItem('douve-lang', lang);
+}
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+(function() {
+  const saved = localStorage.getItem('douve-lang');
+  const browser = navigator.language.slice(0, 2).toLowerCase();
+  const supported = ['fr', 'it', 'en'];
+  const lang = supported.includes(saved) ? saved
+             : supported.includes(browser) ? browser
+             : 'fr';
+  setLang(lang);
+})();
+
+/* ═══════════════════════════════════════
+   HAMBURGER MENU
+═══════════════════════════════════════ */
+const hamburger = document.getElementById('hamburger');
+const navMobile = document.getElementById('nav-mobile');
+
+hamburger.addEventListener('click', () => {
+  navMobile.classList.toggle('open');
+});
+
+function closeMenu() {
+  navMobile.classList.remove('open');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Douve — Nº1 Gennaio '26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:  #2A2AE0;
+  --red:   #E8200A;
+  --white: #FFFFFF;
+  --white-60: rgba(255,255,255,0.6);
+  --white-20: rgba(255,255,255,0.15);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+body {
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--blue);
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--white-20);
+  animation: fadeDown 0.5s ease both;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.header-issue {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white-60);
+  letter-spacing: 0.06em;
+}
+
+/* desktop nav */
+.nav-desktop ul { list-style: none; display: flex; gap: 32px; }
+
+.nav-desktop ul li a {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--white-60);
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-desktop ul li a:hover,
+.nav-desktop ul li a.active { color: var(--white); }
+
+/* hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.25s;
+}
+
+/* mobile menu */
+.nav-mobile {
+  display: none;
+  position: fixed;
+  inset: 60px 0 0 0;
+  background: var(--blue);
+  z-index: 99;
+  flex-direction: column;
+  padding: 40px 32px;
+  border-top: 1px solid var(--white-20);
+}
+
+.nav-mobile.open { display: flex; }
+
+.nav-mobile ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+
+.nav-mobile ul li a {
+  display: block;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--white-20);
+  transition: color 0.2s;
+}
+
+.nav-mobile ul li a:hover { color: var(--red); }
+
+/* ── HERO ── */
+.hero {
+  max-width: 1100px;
+  margin: 80px auto 100px;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 24px;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--red);
+}
+
+.hero-title {
+  font-size: 60px;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.hero-excerpt {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--white-60);
+  margin-bottom: 36px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 2px;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover { opacity: 0.85; }
+
+.hero-image {
+  aspect-ratio: 4/5;
+  background: var(--red);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(255,255,255,0.06) 12px, rgba(255,255,255,0.06) 13px);
+}
+
+.hero-image-label {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── DIVIDER ── */
+.divider {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.divider-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  white-space: nowrap;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--white-20);
+}
+
+/* ── CARDS ── */
+.cards-section {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 40px;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 32px;
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-4px);
+}
+
+.card-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.card-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--white-60);
+  margin-bottom: 24px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--white-20);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.card-footer-author { color: var(--red); }
+.card-footer-date { color: var(--white-60); }
+
+/* ── MOST READ ── */
+.mostread-section {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 40px;
+  animation: fadeUp 0.7s 0.25s ease both;
+}
+
+.mr-item {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--white-20);
+  cursor: pointer;
+}
+
+.mr-item:hover .mr-title { color: var(--red); }
+
+.mr-num {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--red);
+  opacity: 0.5;
+  min-width: 48px;
+  letter-spacing: -0.04em;
+}
+
+.mr-content { flex: 1; }
+
+.mr-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.mr-title {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.mr-time {
+  font-size: 12px;
+  color: var(--white-60);
+  font-weight: 500;
+}
+
+/* ── QUOTE ── */
+.quote-section {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 40px;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+.quote-inner {
+  border-left: 4px solid var(--red);
+  padding: 8px 0 8px 40px;
+}
+
+.quote-text {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.quote-source {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ── NEWSLETTER ── */
+.newsletter-section {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 40px;
+  animation: fadeUp 0.7s 0.35s ease both;
+}
+
+.newsletter-inner {
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.nl-title {
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.nl-title span { color: var(--red); }
+
+.nl-sub {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--white-60);
+}
+
+.nl-form { display: flex; flex-direction: column; gap: 12px; }
+
+.nl-input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--white-20);
+  border-radius: 6px;
+  color: var(--white);
+  padding: 16px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.nl-input::placeholder { color: var(--white-60); }
+.nl-input:focus { border-color: var(--red); }
+
+.nl-btn {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.nl-btn:hover { opacity: 0.85; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--white-20);
+  padding: 48px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.footer-logo {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.footer-tagline {
+  font-size: 12px;
+  color: var(--white-60);
+  margin-top: 4px;
+}
+
+.footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
+
+.footer-links a {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--white); }
+
+.footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  white-space: nowrap;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════
+   RESPONSIVE — TABLET (≤768px)
+════════════════════════════ */
+@media (max-width: 768px) {
+
+  header { padding: 0 24px; }
+
+  .nav-desktop { display: none; }
+  .hamburger { display: flex; }
+  .header-issue { display: none; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin: 48px auto 64px;
+    padding: 0 24px;
+  }
+
+  /* immagine sopra il testo su mobile */
+  .hero { display: flex; flex-direction: column-reverse; }
+
+  .hero-image {
+    aspect-ratio: 16/9;
+    width: 100%;
+  }
+
+  .hero-title { font-size: 40px; }
+  .hero-excerpt { font-size: 15px; }
+
+  .divider { padding: 0 24px; margin-bottom: 32px; }
+
+  .cards-section { padding: 0 24px; margin-bottom: 64px; }
+  .cards-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  .mostread-section { padding: 0 24px; margin-bottom: 64px; }
+
+  .mr-item { gap: 20px; }
+  .mr-num { font-size: 28px; min-width: 36px; }
+  .mr-title { font-size: 16px; }
+  .mr-time { display: none; }
+
+  .quote-section { padding: 0 24px; margin-bottom: 64px; }
+  .quote-text { font-size: 26px; }
+  .quote-inner { padding-left: 24px; }
+
+  .newsletter-section { padding: 0 24px; margin-bottom: 64px; }
+  .newsletter-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 40px 32px;
+  }
+  .nl-title { font-size: 32px; }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 24px;
+    gap: 24px;
+  }
+
+  .footer-links { gap: 16px; }
+}
+
+/* ════════════════════════════
+   RESPONSIVE — MOBILE (≤480px)
+════════════════════════════ */
+@media (max-width: 480px) {
+  .hero-title { font-size: 32px; }
+  .card-title { font-size: 18px; }
+  .quote-text { font-size: 22px; }
+  .nl-title { font-size: 28px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Douve.</div>
+
+  <!-- Desktop nav -->
+  <nav class="nav-desktop">
+    <ul>
+      <li><a href="#" class="active">Editoriale</a></li>
+      <li><a href="#">Letteratura</a></li>
+      <li><a href="#">Musica</a></li>
+      <li><a href="#">Cinema</a></li>
+      <li><a href="#">Arte</a></li>
+      <li><a href="#">Filosofia</a></li>
+    </ul>
+  </nav>
+
+  <span class="header-issue">Nº1 — Gennaio '26</span>
+
+  <!-- Hamburger mobile -->
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile nav -->
+<nav class="nav-mobile" id="nav-mobile">
+  <ul>
+    <li><a href="#" onclick="closeMenu()">Editoriale</a></li>
+    <li><a href="#" onclick="closeMenu()">Letteratura</a></li>
+    <li><a href="#" onclick="closeMenu()">Musica</a></li>
+    <li><a href="#" onclick="closeMenu()">Cinema</a></li>
+    <li><a href="#" onclick="closeMenu()">Arte</a></li>
+    <li><a href="#" onclick="closeMenu()">Filosofia</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-tag">Editoriale</div>
+    <h1 class="hero-title">La parola come atto politico.</h1>
+    <p class="hero-excerpt">In un'epoca in cui ogni enunciato diventa contenuto, scegliere con cura le proprie parole è il gesto più sovversivo che ci rimanga.</p>
+    <a href="#" class="btn-primary">Leggi l'articolo →</a>
+  </div>
+  <div class="hero-image">
+    <span class="hero-image-label">Immagine copertina</span>
+  </div>
+</section>
+
+<!-- ARTICOLI RECENTI -->
+<div class="divider">
+  <span class="divider-label">Articoli recenti</span>
+  <div class="divider-line"></div>
+</div>
+
+<section class="cards-section">
+  <div class="cards-grid">
+    <article class="card">
+      <div class="card-cat">Letteratura</div>
+      <h3 class="card-title">Rileggere Pasolini nel 2026.</h3>
+      <p class="card-body">A cinquant'anni dalla sua scomparsa, la voce di Pasolini risuona con una precisione inquietante.</p>
+      <div class="card-footer">
+        <span class="card-footer-author">Elena Gatti</span>
+        <span class="card-footer-date">10 Mar</span>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-cat">Musica</div>
+      <h3 class="card-title">Il noise come silenzio.</h3>
+      <p class="card-body">Come la musica sperimentale contemporanea reinventa l'idea di assenza sonora e di ascolto.</p>
+      <div class="card-footer">
+        <span class="card-footer-author">Sofia Albanese</span>
+        <span class="card-footer-date">8 Mar</span>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-cat">Cinema</div>
+      <h3 class="card-title">Slow cinema: resistere.</h3>
+      <p class="card-body">Da Tarkovskij a Ceylan, il cinema lento come forma di resistenza al collasso dell'attenzione.</p>
+      <div class="card-footer">
+        <span class="card-footer-author">Luca Ferrara</span>
+        <span class="card-footer-date">5 Mar</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- I PIÙ LETTI -->
+<div class="divider">
+  <span class="divider-label">I più letti</span>
+  <div class="divider-line"></div>
+</div>
+
+<section class="mostread-section">
+  <div class="mr-item">
+    <div class="mr-num">01</div>
+    <div class="mr-content">
+      <div class="mr-cat">Filosofia</div>
+      <div class="mr-title">Perché non leggiamo più libri lunghi.</div>
+    </div>
+    <span class="mr-time">14 min</span>
+  </div>
+  <div class="mr-item">
+    <div class="mr-num">02</div>
+    <div class="mr-content">
+      <div class="mr-cat">Arte</div>
+      <div class="mr-title">La pittura lenta contro il tempo del mercato.</div>
+    </div>
+    <span class="mr-time">6 min</span>
+  </div>
+  <div class="mr-item">
+    <div class="mr-num">03</div>
+    <div class="mr-content">
+      <div class="mr-cat">Fotografia</div>
+      <div class="mr-title">Abitare l'immagine: spazio e sguardo urbano.</div>
+    </div>
+    <span class="mr-time">10 min</span>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-inner">
+    <p class="quote-text">"Il linguaggio non descrive il mondo — lo costruisce."</p>
+    <span class="quote-source">Douve — Nº1 Gennaio '26</span>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="newsletter-inner">
+    <div>
+      <div class="nl-title">Resta con <span>noi.</span></div>
+      <p class="nl-sub">La newsletter mensile di Douve. Arte, poesia, musica, culture — direttamente nella tua casella di posta.</p>
+    </div>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="La tua email">
+      <button class="nl-btn">Iscriviti ora →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Douve.</div>
+    <div class="footer-tagline">Bulletin mensuelle d'art · Bollettino mensile d'arte</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#">Chi siamo</a></li>
+    <li><a href="#">Collabora</a></li>
+    <li><a href="#">Archivio</a></li>
+    <li><a href="#">Contatti</a></li>
+    <li><a href="#">Instagram</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Douve</span>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('nav-mobile');
+
+  hamburger.addEventListener('click', () => {
+    navMobile.classList.toggle('open');
+  });
+
+  function closeMenu() {
+    navMobile.classList.remove('open');
+  }
+</script>
+
+</body>
+</html>

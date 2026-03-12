@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Douve — Nº1 Gennaio '26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #2A2AE0;
+  --red:  #E8200A;
+  --white: #FFFFFF;
+  --white-60: rgba(255,255,255,0.6);
+  --white-20: rgba(255,255,255,0.15);
+  --font: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+body {
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font);
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--blue);
+  border-bottom: 1px solid var(--white-20);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  animation: fadeDown 0.5s ease both;
+}
+
+.nav-logo {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  transition: color 0.15s;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+.nav-issue {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--red);
+  letter-spacing: 0.06em;
+}
+
+/* HERO */
+.hero {
+  padding: 80px 32px 72px;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 28px;
+}
+
+.hero-kicker::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+.hero-title {
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.hero-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-excerpt {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--white-60);
+  max-width: 520px;
+}
+
+.btn {
+  flex-shrink: 0;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 2px solid var(--white);
+  color: var(--white);
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  font-family: var(--font);
+}
+
+.btn:hover { background: var(--white); color: var(--blue); }
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--white-20);
+  margin: 0 32px;
+}
+
+/* SECTION HEADER */
+.section-head {
+  padding: 40px 32px 28px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.section-head h2 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.section-head a {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--white-60);
+  transition: color 0.15s;
+}
+
+.section-head a:hover { color: var(--white); }
+
+/* CARDS */
+.grid {
+  padding: 0 32px 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.card {
+  background: rgba(255,255,255,0.04);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.card:hover { background: rgba(255,255,255,0.09); }
+
+.card-cat {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  flex: 1;
+}
+
+.card-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--white-60);
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--white-20);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white-60);
+}
+
+/* FEATURED */
+.featured {
+  margin: 0 32px;
+  background: var(--red);
+  padding: 56px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  animation: fadeUp 0.6s 0.25s ease both;
+}
+
+.feat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 20px;
+}
+
+.feat-title {
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.feat-desc {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 32px;
+}
+
+.feat-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  margin-top: 20px;
+}
+
+.feat-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.feat-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent, transparent 6px,
+    rgba(255,255,255,0.05) 6px, rgba(255,255,255,0.05) 8px
+  );
+}
+
+/* LIST */
+.list-section {
+  padding: 0 32px 64px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--white-20);
+  cursor: pointer;
+  transition: padding-left 0.2s;
+}
+
+.list-item:hover { padding-left: 8px; }
+
+.list-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.05em;
+}
+
+.list-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.list-cat {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white-60);
+}
+
+/* NEWSLETTER */
+.newsletter {
+  margin: 64px 32px;
+  border: 1px solid var(--white-20);
+  padding: 56px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  animation: fadeUp 0.6s 0.35s ease both;
+}
+
+.nl-text h3 {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.nl-text h3 span { color: var(--red); }
+
+.nl-text p {
+  font-size: 15px;
+  color: var(--white-60);
+  line-height: 1.55;
+  max-width: 380px;
+}
+
+.nl-form { display: flex; flex-shrink: 0; }
+
+.nl-input {
+  background: transparent;
+  border: 2px solid var(--white-20);
+  border-right: none;
+  color: var(--white);
+  padding: 14px 20px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  width: 260px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.nl-input::placeholder { color: rgba(255,255,255,0.3); }
+.nl-input:focus { border-color: var(--red); }
+
+.nl-btn {
+  background: var(--red);
+  color: var(--white);
+  border: 2px solid var(--red);
+  padding: 14px 24px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.nl-btn:hover { background: var(--white); color: var(--red); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--white-20);
+  padding: 40px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.footer-tagline {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white-60);
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.footer-nav a {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  transition: color 0.15s;
+}
+
+.footer-nav a:hover { color: var(--white); }
+
+/* ANIMATIONS */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Douve</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">In evidenza</a></li>
+    <li><a href="#">Letteratura</a></li>
+    <li><a href="#">Musica</a></li>
+    <li><a href="#">Cinema</a></li>
+    <li><a href="#">Arte</a></li>
+    <li><a href="#">Filosofia</a></li>
+  </ul>
+  <div class="nav-issue">Nº1 — Gennaio '26</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-kicker">Editoriale</div>
+  <h1 class="hero-title">La parola<br>come <em>atto</em><br>politico.</h1>
+  <div class="hero-row">
+    <p class="hero-excerpt">In un'epoca in cui ogni enunciato diventa contenuto, scegliere con cura le proprie parole è forse il gesto più sovversivo che ci rimanga.</p>
+    <a href="#" class="btn">Leggi l'articolo →</a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<div class="section-head">
+  <h2>Articoli recenti</h2>
+  <a href="#">Vedi tutti →</a>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-cat">Letteratura</div>
+    <h3 class="card-title">Rileggere Pasolini nel 2026.</h3>
+    <p class="card-desc">A cinquant'anni dalla sua scomparsa, la voce di Pasolini risuona con una precisione inquietante.</p>
+    <div class="card-meta"><span>Elena Gatti</span><span>10 Mar</span></div>
+  </div>
+  <div class="card">
+    <div class="card-cat">Musica</div>
+    <h3 class="card-title">Il noise come silenzio.</h3>
+    <p class="card-desc">Come la musica sperimentale contemporanea reinventa l'idea di assenza sonora e di vuoto.</p>
+    <div class="card-meta"><span>Sofia Albanese</span><span>8 Mar</span></div>
+  </div>
+  <div class="card">
+    <div class="card-cat">Cinema</div>
+    <h3 class="card-title">Slow cinema: resistere.</h3>
+    <p class="card-desc">Da Tarkovskij a Ceylan, una genealogia del cinema lento come forma di resistenza estetica.</p>
+    <div class="card-meta"><span>Luca Ferrara</span><span>5 Mar</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-head">
+  <h2>In primo piano</h2>
+</div>
+
+<div class="featured">
+  <div>
+    <div class="feat-label">Filosofia // 10</div>
+    <h2 class="feat-title">Perché non leggiamo più libri lunghi.</h2>
+    <p class="feat-desc">La crisi dell'attenzione profonda non è solo un problema tecnologico — è una questione filosofica che riguarda il nostro rapporto con il tempo e la complessità.</p>
+    <a href="#" class="btn" style="border-color:white;color:white;">Leggi →</a>
+    <div class="feat-author">Valentina Rossi — 14 min di lettura</div>
+  </div>
+  <div class="feat-image"></div>
+</div>
+
+<hr class="divider" style="margin-top:0;">
+
+<div class="section-head">
+  <h2>I più letti</h2>
+  <a href="#">Archivio →</a>
+</div>
+
+<div class="list-section">
+  <div class="list-item">
+    <span class="list-num">01</span>
+    <span class="list-title">La pittura lenta contro il tempo del mercato.</span>
+    <span class="list-cat">Arte</span>
+  </div>
+  <div class="list-item">
+    <span class="list-num">02</span>
+    <span class="list-title">Il paradosso della scelta nell'era dello streaming.</span>
+    <span class="list-cat">Società</span>
+  </div>
+  <div class="list-item">
+    <span class="list-num">03</span>
+    <span class="list-title">Abitare l'immagine: spazio e sguardo nella fotografia urbana.</span>
+    <span class="list-cat">Fotografia</span>
+  </div>
+  <div class="list-item">
+    <span class="list-num">04</span>
+    <span class="list-title">Intervista: Giulia Merlo sull'architettura del vuoto.</span>
+    <span class="list-cat">Intervista</span>
+  </div>
+</div>
+
+<div class="newsletter">
+  <div class="nl-text">
+    <h3>Resta con <span>noi.</span></h3>
+    <p>La newsletter mensile di Douve. Arte, poesia, musica, culture — direttamente nella tua casella di posta.</p>
+  </div>
+  <div class="nl-form">
+    <input class="nl-input" type="email" placeholder="la-tua@email.it">
+    <button class="nl-btn">Iscriviti →</button>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">Douve.</div>
+    <div class="footer-tagline">Bulletin mensuelle d'art — Bollettino mensile d'arte</div>
+  </div>
+  <ul class="footer-nav">
+    <li><a href="#">Chi siamo</a></li>
+    <li><a href="#">Collabora</a></li>
+    <li><a href="#">Archivio</a></li>
+    <li><a href="#">Contatti</a></li>
+    <li><a href="#">Instagram</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
